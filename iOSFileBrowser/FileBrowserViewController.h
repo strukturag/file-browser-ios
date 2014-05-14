@@ -11,7 +11,7 @@
 
 @class FileBrowserViewController;
 
-@protocol FileBrowserControllerViewControllerDelegate <NSObject>
+@protocol FileBrowserViewControllerDelegate <NSObject>
 @required
 - (void)fileBrowser:(FileBrowserViewController *)fileBrowser didPickFileAtPath:(NSString *)path;
 
@@ -24,7 +24,7 @@
 
 @interface FileBrowserViewController : UIViewController
 
-@property (nonatomic, weak) id<FileBrowserControllerViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<FileBrowserViewControllerDelegate> delegate;
 
 @property (nonatomic, strong) UIColor *cellBackgroundColor;
 
