@@ -27,6 +27,7 @@
 @property (nonatomic, weak) id<FileBrowserViewControllerDelegate> delegate;
 
 @property (nonatomic, strong) UIColor *cellBackgroundColor;
+@property (nonatomic, strong) UIColor *tableViewBackgroundColor;
 
 @property (nonatomic, readonly, strong) UILabel *emptyDirectoryMessageLabel;
 @property (nonatomic, readonly, strong) UIView *emptyDirectoryAdditionalConatinerView;

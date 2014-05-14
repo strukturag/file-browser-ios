@@ -40,6 +40,7 @@
 		[self populateDirectoryContentsArrayFromDirectoryAtPath:_directoryPath];
 		
 		self.cellBackgroundColor = [UIColor whiteColor];
+		self.tableViewBackgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -58,6 +59,7 @@
     [super viewDidLoad];
 	
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismiss)];
+	self.tableView.backgroundColor = self.tableViewBackgroundColor;
 	
 	[self.tableView reloadData];
 }
