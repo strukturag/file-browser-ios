@@ -19,6 +19,8 @@
 - (BOOL)fileBrowser:(FileBrowserViewController *)fileBrowser shouldPresentDocumentsControllerForFileAtPath:(NSString *)path;
 - (BOOL)fileBrowser:(FileBrowserViewController *)fileBrowser shouldShowEmptyDirectoryMessageAtDirectoryPath:(NSString *)directoryPath;
 
+- (UIView *)fileBrowser:(FileBrowserViewController *)fileBrowser viewForEmptyDirectoryMessageWithSize:(CGSize)viewSize;
+
 @end
 
 
@@ -29,10 +31,11 @@
 @property (nonatomic, strong) UIColor *cellBackgroundColor;
 @property (nonatomic, strong) UIColor *tableViewBackgroundColor;
 
-@property (nonatomic, readonly, strong) UILabel *emptyDirectoryMessageLabel;
-@property (nonatomic, readonly, strong) UIView *emptyDirectoryAdditionalConatinerView;
+@property (nonatomic, strong) NSString *emptyDirectoryMessageText;
+@property (nonatomic, strong) NSAttributedString *emptyDirectoryMessageAttributedText;
 
 - (id)initWithDirectoryPath:(NSString *)directoryPath;
 
+- (void)reloadViewForEmptyMessage;
 
 @end

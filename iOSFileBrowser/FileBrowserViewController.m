@@ -24,6 +24,8 @@
 @property (nonatomic, strong) IBOutlet UIView *emptyDirectoryAdditionalConatinerView;
 
 
+@property (nonatomic, strong) UIView *emptyMessageView;
+
 @end
 
 @implementation FileBrowserViewController
@@ -61,7 +63,18 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismiss)];
 	self.tableView.backgroundColor = self.tableViewBackgroundColor;
 	
+	if (self.emptyDirectoryMessageAttributedText) {
+		self.emptyDirectoryMessageLabel.attributedText = self.emptyDirectoryMessageAttributedText;
+	} else {
+		self.emptyDirectoryMessageLabel.text = self.emptyDirectoryMessageText;
+	}
+	
 	[self.tableView reloadData];
+	
+	if ([self.delegate respondsToSelector:@selector(fileBrowser:viewForEmptyDirectoryMessageWithSize:)] && !self.emptyMessageView) {
+		self.emptyMessageView = [self.delegate fileBrowser:self viewForEmptyDirectoryMessageWithSize:self.emptyDirectoryAdditionalConatinerView.bounds.size];
+		[self.emptyDirectoryAdditionalConatinerView addSubview:self.emptyMessageView];
+	}
 }
 
 
@@ -95,6 +108,20 @@
 {
 	if (self.presentingViewController) {
 		[self dismissViewControllerAnimated:YES completion:NULL];
+	}
+}
+
+
+#pragma mark - Public
+
+- (void)reloadViewForEmptyMessage
+{
+	[self.emptyMessageView removeFromSuperview];
+	self.emptyMessageView = nil;
+	
+	if ([self.delegate respondsToSelector:@selector(fileBrowser:viewForEmptyDirectoryMessageWithSize:)]) {
+		self.emptyMessageView = [self.delegate fileBrowser:self viewForEmptyDirectoryMessageWithSize:self.emptyDirectoryAdditionalConatinerView.bounds.size];
+		[self.emptyDirectoryAdditionalConatinerView addSubview:self.emptyMessageView];
 	}
 }
 
