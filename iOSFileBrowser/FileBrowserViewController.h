@@ -1,5 +1,5 @@
 //
-//  FileBrowserControllerViewController.h
+//  FileBrowserViewController.h
 //  iOSFileBrowser
 //
 //  Created by Yuriy Shevchuk on 12/23/13.
