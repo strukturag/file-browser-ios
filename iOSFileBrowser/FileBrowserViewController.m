@@ -18,13 +18,12 @@
 }
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) IBOutlet UIView *emptyMessageContainerView;
+@property (nonatomic, strong) IBOutlet UIView *emptyDirectoryContainerView;
 
 @property (nonatomic, strong) IBOutlet UILabel *emptyDirectoryMessageLabel;
-@property (nonatomic, strong) IBOutlet UIView *emptyDirectoryAdditionalConatinerView;
 
 
-@property (nonatomic, strong) UIView *emptyMessageView;
+@property (nonatomic, strong) UIView *userEmptyDirectoryView;
 
 @end
 
@@ -43,6 +42,9 @@
 		
 		self.cellBackgroundColor = [UIColor whiteColor];
 		self.tableViewBackgroundColor = [UIColor whiteColor];
+		
+		
+		self.emptyDirectoryMessageText = NSLocalizedString(@"There is no files in this directory.", @"There is no files in this directory.");
     }
     return self;
 }
@@ -71,9 +73,8 @@
 	
 	[self.tableView reloadData];
 	
-	if ([self.delegate respondsToSelector:@selector(fileBrowser:viewForEmptyDirectoryMessageWithSize:)] && !self.emptyMessageView) {
-		self.emptyMessageView = [self.delegate fileBrowser:self viewForEmptyDirectoryMessageWithSize:self.emptyDirectoryAdditionalConatinerView.bounds.size];
-		[self.emptyDirectoryAdditionalConatinerView addSubview:self.emptyMessageView];
+	if ([self.delegate respondsToSelector:@selector(fileBrowserHasLoadedItsView:)]) {
+		[self.delegate fileBrowserHasLoadedItsView:self];
 	}
 }
 
@@ -94,10 +95,10 @@
 	
 	if (shouldShowEmptyDirectoryMessage) {
 		self.tableView.hidden = YES;
-		self.emptyMessageContainerView.hidden = NO;
+		self.emptyDirectoryContainerView.hidden = NO;
 	} else {
 		self.tableView.hidden = NO;
-		self.emptyMessageContainerView.hidden = YES;
+		self.emptyDirectoryContainerView.hidden = YES;
 	}
 }
 
@@ -114,14 +115,16 @@
 
 #pragma mark - Public
 
-- (void)reloadViewForEmptyMessage
+- (void)setEmptyDirectoryView:(UIView *)view
 {
-	[self.emptyMessageView removeFromSuperview];
-	self.emptyMessageView = nil;
-	
-	if ([self.delegate respondsToSelector:@selector(fileBrowser:viewForEmptyDirectoryMessageWithSize:)]) {
-		self.emptyMessageView = [self.delegate fileBrowser:self viewForEmptyDirectoryMessageWithSize:self.emptyDirectoryAdditionalConatinerView.bounds.size];
-		[self.emptyDirectoryAdditionalConatinerView addSubview:self.emptyMessageView];
+	if (view) {
+		self.emptyDirectoryMessageLabel.hidden = YES;
+		self.userEmptyDirectoryView = view;
+		[self.emptyDirectoryContainerView addSubview:self.userEmptyDirectoryView];
+	} else {
+		self.emptyDirectoryMessageLabel.hidden = NO;
+		[self.userEmptyDirectoryView removeFromSuperview];
+		self.userEmptyDirectoryView = nil;
 	}
 }
 

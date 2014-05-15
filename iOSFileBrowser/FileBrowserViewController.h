@@ -19,7 +19,7 @@
 - (BOOL)fileBrowser:(FileBrowserViewController *)fileBrowser shouldPresentDocumentsControllerForFileAtPath:(NSString *)path;
 - (BOOL)fileBrowser:(FileBrowserViewController *)fileBrowser shouldShowEmptyDirectoryMessageAtDirectoryPath:(NSString *)directoryPath;
 
-- (UIView *)fileBrowser:(FileBrowserViewController *)fileBrowser viewForEmptyDirectoryMessageWithSize:(CGSize)viewSize;
+- (void)fileBrowserHasLoadedItsView:(FileBrowserViewController *)fileBrowser;
 
 @end
 
@@ -36,6 +36,6 @@
 
 - (id)initWithDirectoryPath:(NSString *)directoryPath;
 
-- (void)reloadViewForEmptyMessage;
+- (void)setEmptyDirectoryView:(UIView *)view;
 
 @end
