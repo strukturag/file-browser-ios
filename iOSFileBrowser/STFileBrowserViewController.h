@@ -1,5 +1,5 @@
 //
-//  FileBrowserViewController.h
+//  STFileBrowserViewController.h
 //  iOSFileBrowser
 //
 //  Created by Yuriy Shevchuk on 12/23/13.
@@ -9,22 +9,22 @@
 #import <UIKit/UIKit.h>
 
 
-@class FileBrowserViewController;
+@class STFileBrowserViewController;
 
 @protocol FileBrowserViewControllerDelegate <NSObject>
 @required
-- (void)fileBrowser:(FileBrowserViewController *)fileBrowser didPickFileAtPath:(NSString *)path;
+- (void)fileBrowser:(STFileBrowserViewController *)fileBrowser didPickFileAtPath:(NSString *)path;
 
 @optional
-- (BOOL)fileBrowser:(FileBrowserViewController *)fileBrowser shouldPresentDocumentsControllerForFileAtPath:(NSString *)path;
-- (BOOL)fileBrowser:(FileBrowserViewController *)fileBrowser shouldShowEmptyDirectoryMessageAtDirectoryPath:(NSString *)directoryPath;
+- (BOOL)fileBrowser:(STFileBrowserViewController *)fileBrowser shouldPresentDocumentsControllerForFileAtPath:(NSString *)path;
+- (BOOL)fileBrowser:(STFileBrowserViewController *)fileBrowser shouldShowEmptyDirectoryMessageAtDirectoryPath:(NSString *)directoryPath;
 
-- (void)fileBrowserHasLoadedItsView:(FileBrowserViewController *)fileBrowser;
+- (void)fileBrowserHasLoadedItsView:(STFileBrowserViewController *)fileBrowser;
 
 @end
 
 
-@interface FileBrowserViewController : UIViewController
+@interface STFileBrowserViewController : UIViewController
 
 @property (nonatomic, weak) id<FileBrowserViewControllerDelegate> delegate;
 

@@ -1,15 +1,15 @@
 //
-//  FileBrowserViewController.m
+//  STFileBrowserViewController.m
 //  iOSFileBrowser
 //
 //  Created by Yuriy Shevchuk on 12/23/13.
 //  Copyright (c) 2013 struktur AG. All rights reserved.
 //
 
-#import "FileBrowserViewController.h"
+#import "STFileBrowserViewController.h"
 
 
-@interface FileBrowserViewController () <UITableViewDataSource, UITableViewDelegate, UIDocumentInteractionControllerDelegate>
+@interface STFileBrowserViewController () <UITableViewDataSource, UITableViewDelegate, UIDocumentInteractionControllerDelegate>
 {
 	NSString *_directoryPath;
 	NSMutableArray *_directoryContentsArray;
@@ -27,11 +27,11 @@
 
 @end
 
-@implementation FileBrowserViewController
+@implementation STFileBrowserViewController
 
 - (id)initWithDirectoryPath:(NSString *)directoryPath
 {
-    self = [super initWithNibName:@"FileBrowserViewController" bundle:nil];
+    self = [super initWithNibName:@"STFileBrowserViewController" bundle:nil];
     if (self) {
         _directoryPath = directoryPath;
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Files" image:[UIImage imageNamed:@"files_black"] tag:0];

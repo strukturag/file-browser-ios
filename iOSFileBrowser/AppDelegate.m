@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "FileBrowserViewController.h"
+#import "STFileBrowserViewController.h"
 
 @implementation AppDelegate
 
@@ -30,7 +30,7 @@
 	}
 
 	
-	FileBrowserViewController *fileBrowser = [[FileBrowserViewController alloc] initWithDirectoryPath:documentsDirectory];
+	STFileBrowserViewController *fileBrowser = [[STFileBrowserViewController alloc] initWithDirectoryPath:documentsDirectory];
 	UINavigationController *navContr = [[UINavigationController alloc] initWithRootViewController:fileBrowser];
 	
 	self.window.rootViewController = navContr;

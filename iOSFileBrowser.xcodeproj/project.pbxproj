@@ -19,8 +19,8 @@
 		5B44F6A11923B2630011DB48 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B44F6891923B2630011DB48 /* UIKit.framework */; };
 		5B44F6A91923B2630011DB48 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5B44F6A71923B2630011DB48 /* InfoPlist.strings */; };
 		5B44F6AB1923B2630011DB48 /* iOSFileBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B44F6AA1923B2630011DB48 /* iOSFileBrowserTests.m */; };
-		5B44F6B71923B2D20011DB48 /* FileBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B44F6B51923B2D20011DB48 /* FileBrowserViewController.m */; };
-		5B44F6B81923B2D20011DB48 /* FileBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B44F6B61923B2D20011DB48 /* FileBrowserViewController.xib */; };
+		5B44F6B71923B2D20011DB48 /* STFileBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B44F6B51923B2D20011DB48 /* STFileBrowserViewController.m */; };
+		5B44F6B81923B2D20011DB48 /* STFileBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B44F6B61923B2D20011DB48 /* STFileBrowserViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,9 +50,9 @@
 		5B44F6A61923B2630011DB48 /* iOSFileBrowserTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOSFileBrowserTests-Info.plist"; sourceTree = "<group>"; };
 		5B44F6A81923B2630011DB48 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5B44F6AA1923B2630011DB48 /* iOSFileBrowserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSFileBrowserTests.m; sourceTree = "<group>"; };
-		5B44F6B41923B2D20011DB48 /* FileBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileBrowserViewController.h; sourceTree = "<group>"; };
-		5B44F6B51923B2D20011DB48 /* FileBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileBrowserViewController.m; sourceTree = "<group>"; };
-		5B44F6B61923B2D20011DB48 /* FileBrowserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileBrowserViewController.xib; sourceTree = "<group>"; };
+		5B44F6B41923B2D20011DB48 /* STFileBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFileBrowserViewController.h; sourceTree = "<group>"; };
+		5B44F6B51923B2D20011DB48 /* STFileBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFileBrowserViewController.m; sourceTree = "<group>"; };
+		5B44F6B61923B2D20011DB48 /* STFileBrowserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STFileBrowserViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +112,9 @@
 		5B44F68B1923B2630011DB48 /* iOSFileBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				5B44F6B41923B2D20011DB48 /* FileBrowserViewController.h */,
-				5B44F6B51923B2D20011DB48 /* FileBrowserViewController.m */,
-				5B44F6B61923B2D20011DB48 /* FileBrowserViewController.xib */,
+				5B44F6B41923B2D20011DB48 /* STFileBrowserViewController.h */,
+				5B44F6B51923B2D20011DB48 /* STFileBrowserViewController.m */,
+				5B44F6B61923B2D20011DB48 /* STFileBrowserViewController.xib */,
 				5B44F6941923B2630011DB48 /* AppDelegate.h */,
 				5B44F6951923B2630011DB48 /* AppDelegate.m */,
 				5B44F6971923B2630011DB48 /* Images.xcassets */,
@@ -229,7 +229,7 @@
 			files = (
 				5B44F6901923B2630011DB48 /* InfoPlist.strings in Resources */,
 				5B44F6981923B2630011DB48 /* Images.xcassets in Resources */,
-				5B44F6B81923B2D20011DB48 /* FileBrowserViewController.xib in Resources */,
+				5B44F6B81923B2D20011DB48 /* STFileBrowserViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,7 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B44F6B71923B2D20011DB48 /* FileBrowserViewController.m in Sources */,
+				5B44F6B71923B2D20011DB48 /* STFileBrowserViewController.m in Sources */,
 				5B44F6961923B2630011DB48 /* AppDelegate.m in Sources */,
 				5B44F6921923B2630011DB48 /* main.m in Sources */,
 			);
