@@ -17,12 +17,6 @@
 	UIDocumentInteractionController *_documentInteractionController;
 }
 
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) IBOutlet UIView *emptyDirectoryContainerView;
-
-@property (nonatomic, strong) IBOutlet UILabel *emptyDirectoryMessageLabel;
-
-
 @property (nonatomic, strong) UIView *userEmptyDirectoryView;
 
 @end
@@ -34,10 +28,8 @@
     self = [super initWithNibName:@"STFileBrowserViewController" bundle:nil];
     if (self) {
         _directoryPath = directoryPath;
-        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Files" image:[UIImage imageNamed:@"files_black"] tag:0];
-        self.tabBarItem.selectedImage = [UIImage imageNamed:@"files_white"];
 		self.navigationItem.title = [_directoryPath lastPathComponent];
-		
+        
 		[self populateDirectoryContentsArrayFromDirectoryAtPath:_directoryPath];
 		
 		self.cellBackgroundColor = [UIColor whiteColor];
@@ -61,8 +53,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismiss)];
+    
 	self.tableView.backgroundColor = self.tableViewBackgroundColor;
 	
 	if (self.emptyDirectoryMessageAttributedText) {
@@ -82,6 +73,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+    
+    if (self.hasDismissButton) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismiss)];
+    }
 	
 	BOOL shouldShowEmptyDirectoryMessage = YES;
 	
