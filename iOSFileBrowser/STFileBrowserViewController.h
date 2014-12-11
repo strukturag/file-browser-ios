@@ -36,6 +36,10 @@
 @property (nonatomic, strong) NSString *emptyDirectoryMessageText;
 @property (nonatomic, strong) NSAttributedString *emptyDirectoryMessageAttributedText;
 
+@property (nonatomic, copy) NSString *noAppToOpenFileAlertTitle;
+@property (nonatomic, copy) NSString *noAppToOpenFileAlertMessage;
+@property (nonatomic, copy) NSString *noAppToOpenFileAlertOkButtonLabel;
+
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *emptyDirectoryContainerView;
 @property (nonatomic, strong) IBOutlet UILabel *emptyDirectoryMessageLabel;

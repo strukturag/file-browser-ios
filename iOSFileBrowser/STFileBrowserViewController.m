@@ -36,7 +36,20 @@
 		self.tableViewBackgroundColor = [UIColor whiteColor];
 		
 		
-		self.emptyDirectoryMessageText = NSLocalizedString(@"There is no files in this directory.", @"There is no files in this directory.");
+		self.emptyDirectoryMessageText = NSLocalizedStringWithDefaultValue(@"There is no files in this directory.",
+																		   nil, [NSBundle mainBundle],
+																		   @"There is no files in this directory.",
+																		   @"");
+		
+		self.noAppToOpenFileAlertTitle = nil;
+		self.noAppToOpenFileAlertMessage = NSLocalizedStringWithDefaultValue(@"We are sorry but you do not have any application that can open this file",
+																			 nil, [NSBundle mainBundle],
+																			 @"We are sorry but you do not have any application that can open this file",
+																			 @"");
+		self.noAppToOpenFileAlertOkButtonLabel = NSLocalizedStringWithDefaultValue(@"OK",
+																				   nil, [NSBundle mainBundle],
+																				   @"OK",
+																				   @"");
     }
     return self;
 }
@@ -244,10 +257,10 @@
 		if (!canPreview) {
 			BOOL canShowActions = [_documentInteractionController presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
 			if (!canShowActions) {
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-																message:@"We are sorry but you do not have any application that can open this file"
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.noAppToOpenFileAlertTitle
+																message:self.noAppToOpenFileAlertMessage
 															   delegate:nil
-													  cancelButtonTitle:@"OK"
+													  cancelButtonTitle:self.noAppToOpenFileAlertOkButtonLabel
 													  otherButtonTitles:nil];
 				
 				[alert show];
