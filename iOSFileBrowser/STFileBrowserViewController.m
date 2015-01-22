@@ -15,6 +15,9 @@
 	NSMutableArray *_directoryContentsArray;
     
 	UIDocumentInteractionController *_documentInteractionController;
+    UIDocumentInteractionController *_iconsDocumentInteractionController;
+    
+    NSTimer *_refreshDirectoryContentTimer;
 }
 
 @property (nonatomic, strong) UIView *userEmptyDirectoryView;
@@ -29,9 +32,7 @@
     if (self) {
         _directoryPath = directoryPath;
 		self.navigationItem.title = [_directoryPath lastPathComponent];
-        
-		[self populateDirectoryContentsArrayFromDirectoryAtPath:_directoryPath];
-		
+        		
 		self.cellBackgroundColor = [UIColor whiteColor];
 		self.tableViewBackgroundColor = [UIColor whiteColor];
 		
@@ -58,6 +59,7 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_refreshDirectoryContentTimer invalidate];
 }
 
 
@@ -91,23 +93,17 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismiss)];
     }
 	
-	BOOL shouldShowEmptyDirectoryMessage = YES;
-	
-	if ([self.delegate respondsToSelector:@selector(fileBrowser:shouldShowEmptyDirectoryMessageAtDirectoryPath:)]) {
-		shouldShowEmptyDirectoryMessage = [self.delegate fileBrowser:self shouldShowEmptyDirectoryMessageAtDirectoryPath:_directoryPath];
-	}
-	
 	//TODO: yuriy - Add additional logic for handling '..' paths which should change _directoryPath to its supernode
-	
-	shouldShowEmptyDirectoryMessage = shouldShowEmptyDirectoryMessage && ([_directoryContentsArray count] <= 0);
-	
-	if (shouldShowEmptyDirectoryMessage) {
-		self.tableView.hidden = YES;
-		self.emptyDirectoryContainerView.hidden = NO;
-	} else {
-		self.tableView.hidden = NO;
-		self.emptyDirectoryContainerView.hidden = YES;
-	}
+    
+    [self refreshFileBrowserViewWithDirectoryAtPath:_directoryPath];
+    
+     _refreshDirectoryContentTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(timerTicked:) userInfo:nil repeats:YES];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [_refreshDirectoryContentTimer invalidate];
 }
 
 
@@ -118,6 +114,14 @@
 	if (self.presentingViewController) {
 		[self dismissViewControllerAnimated:YES completion:NULL];
 	}
+}
+
+
+#pragma mark - Timers
+
+- (void)timerTicked:(NSTimer*)timer
+{
+    [self refreshFileBrowserViewWithDirectoryAtPath:_directoryPath];
 }
 
 
@@ -177,6 +181,28 @@
 }
 
 
+- (void)refreshFileBrowserViewWithDirectoryAtPath:(NSString *)directoryPath
+{
+    BOOL shouldShowEmptyDirectoryMessage = YES;
+    
+    [self populateDirectoryContentsArrayFromDirectoryAtPath:directoryPath];
+    
+    if ([self.delegate respondsToSelector:@selector(fileBrowser:shouldShowEmptyDirectoryMessageAtDirectoryPath:)]) {
+        shouldShowEmptyDirectoryMessage = [self.delegate fileBrowser:self shouldShowEmptyDirectoryMessageAtDirectoryPath:_directoryPath];
+    }
+    
+    if (shouldShowEmptyDirectoryMessage && ([_directoryContentsArray count] <= 0)) {
+        self.tableView.hidden = YES;
+        self.emptyDirectoryContainerView.hidden = NO;
+    } else {
+        self.tableView.hidden = NO;
+        self.emptyDirectoryContainerView.hidden = YES;
+    }
+    
+    [self.tableView reloadData];
+}
+
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -202,13 +228,13 @@
 	}
     
     NSString *path = [_directoryContentsArray objectAtIndex:indexPath.row];
-	NSURL *url = [NSURL fileURLWithPathComponents:@[_directoryPath, path]];
-	if (!_documentInteractionController) {
-		_documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:url];
-	}
-	_documentInteractionController.URL = url;
+    NSURL *url = [NSURL fileURLWithPathComponents:@[_directoryPath, path]];
+    if (!_iconsDocumentInteractionController) {
+        _iconsDocumentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:url];
+    }
+    _iconsDocumentInteractionController.URL = url;
 	
-	cell.imageView.image = [_documentInteractionController.icons objectAtIndex:0];
+	cell.imageView.image = [_iconsDocumentInteractionController.icons objectAtIndex:0];
 	cell.textLabel.text = [_directoryContentsArray objectAtIndex:indexPath.row];
 	cell.detailTextLabel.text = nil;
 	
